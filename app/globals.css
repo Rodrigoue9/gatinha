@@ -1,0 +1,206 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg-deep: #050816;
+  --bg-night: #091127;
+  --text-main: #f8efe6;
+  --text-soft: #d8cfc5;
+  --gold: #f0c98d;
+  --rose: #eeb0b1;
+  --mist: #bfd4ff;
+  --paper: #f8efe7;
+  --ink: #362d27;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --font-body: "Aptos", "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(191, 212, 255, 0.08), transparent 28%),
+    radial-gradient(circle at 20% 20%, rgba(240, 201, 141, 0.12), transparent 24%),
+    linear-gradient(160deg, var(--bg-deep) 0%, var(--bg-night) 48%, #04050b 100%);
+  color: var(--text-main);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background: rgba(240, 201, 141, 0.3);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.star {
+  position: absolute;
+  display: block;
+  height: 0.35rem;
+  width: 0.35rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0 14px rgba(255, 255, 255, 0.5);
+}
+
+.details-note {
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.details-note[open] {
+  transform: translateY(-2px);
+  border-color: rgba(240, 201, 141, 0.45);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.03));
+  box-shadow: 0 24px 60px rgba(3, 6, 18, 0.22);
+}
+
+.letter-paper {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(145deg, rgba(248, 239, 231, 0.98), rgba(244, 232, 219, 0.96)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent);
+  color: var(--ink);
+  box-shadow:
+    0 40px 80px rgba(2, 6, 23, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.letter-paper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 0, transparent calc(100% - 1px), rgba(77, 53, 30, 0.08) calc(100% - 1px)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent 30%);
+  pointer-events: none;
+}
+
+.glow-ring {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    0 0 80px rgba(191, 212, 255, 0.12),
+    inset 0 0 50px rgba(255, 255, 255, 0.05);
+}
+
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px);
+  background-size: 5rem 5rem;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(-3%, 3%, 0) scale(1.03);
+  }
+
+  100% {
+    transform: translate3d(2%, -2%, 0) scale(0.98);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -16px, 0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-drift {
+  animation: drift 16s ease-in-out infinite alternate;
+}
+
+.animate-float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 7s ease-in-out infinite;
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-drift,
+  .animate-float-slow,
+  .animate-glow-pulse,
+  .animate-twinkle {
+    animation: none !important;
+  }
+
+  .details-note {
+    transition: none;
+  }
+}
